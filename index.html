@@ -27,10 +27,12 @@
         </ul>
       </header>
       <section>
-        <hr><p></p>ENTRUST
-Optimization Using Trust Region Methods
+        <hr>
+        <center>ENTRUST</center>
+        <center>Optimization Using Trust Region Methods</center>
+        <hr>
 
-<hr><p><strong>ENTRUST</strong> is a library of MATLAB routines which implement a variety of algorithms for finding a vector <em>X</em> which minimizes the value of a scalar function <em>F(X)</em>.</p>
+<p><strong>ENTRUST</strong> is a library of MATLAB routines which implement a variety of algorithms for finding a vector <em>X</em> which minimizes the value of a scalar function <em>F(X)</em>.</p>
 
 <p><strong>ENTRUST</strong> is a driver for the solution of an unconstrained optimization problem using line search or trust-region globalization strategies and several types of secant update strategies.</p>
 
@@ -47,10 +49,10 @@ Optimization Using Trust Region Methods
 <p>To specify an optimization problem, we assume we have</p>
 
 <blockquote>
-<pre><code>_X_, an N-vector of independent variables;
-_F(X)_, a scalar functional;
-_G(X)_, the gradient N-vector dF/dXi;
-_H(X)_, the Hessian NxN-matrix d2F/dXidXj.
+<pre><code>X, an N-vector of independent variables;
+F(X), a scalar functional;
+G(X), the gradient N-vector dF/dXi;
+H(X), the Hessian NxN-matrix d2F/dXidXj.
 </code></pre>
 </blockquote>
 
@@ -65,9 +67,9 @@ _H(X)_, the Hessian NxN-matrix d2F/dXidXj.
 <p>To specify a problem in least squares, we assume we have:</p>
 
 <blockquote>
-<pre><code>_X_, an N-vector of independent variables;
-_R(X)_, an M-vector of nonlinear functions;
-_J(X)_, the Jacobian MxN-matrix dFi/dXj.
+<pre><code>X, an N-vector of independent variables;
+R(X), an M-vector of nonlinear functions;
+J(X), the Jacobian MxN-matrix dFi/dXj.
 </code></pre>
 </blockquote>
 
@@ -79,17 +81,17 @@ _J(X)_, the Jacobian MxN-matrix dFi/dXj.
 
 <p>If we have a least squares problem (_R_ and <em>J</em>), we can create a corresponding optimization problem. We simply define</p>
 
-<pre><code>_F(X)_ = sum ( 1 &lt;= i &lt;= M ) _Ri_(_X_)2 
+<pre><code>F(X) = sum ( 1 &lt;= i &lt;= M ) Ri(X)2 
 </code></pre>
 
 <p>Certainly, minimizing <em>F</em> will minimize the sum of squares of the entries of <em>R</em>.</p>
 
-<p>If we have an optimization problem (_F_, <em>G</em> and <em>H</em>), we can create a related least squares problem. We simply define</p>
+<p>If we have an optimization problem (<em>F</em>, <em>G</em> and <em>H</em>), we can create a related least squares problem. We simply define</p>
 
-<pre><code>_R_(_X_) = _G_(_X_) 
+<pre><code>R(X) = G(X) 
 </code></pre>
 
-<p>Note that for this least squares problem, we will have M=N. We minimize the norm of <em>R</em>(_X_), and if this minimum norm is zero, we have a critical point of our optimization function <em>F</em>; however, the critical point is not a guaranteed minimizer of <em>F</em>, though for some problems, there is extra information that can tell us we have, indeed, found a minimizer.</p>
+<p>Note that for this least squares problem, we will have M=N. We minimize the norm of <em>R</em>(<em></em>X</em>), and if this minimum norm is zero, we have a critical point of our optimization function <em>F</em>; however, the critical point is not a guaranteed minimizer of <em>F</em>, though for some problems, there is extra information that can tell us we have, indeed, found a minimizer.</p>
 
 <h2>Solving a Problem using <strong>ENTRUST</strong>
 </h2>
@@ -117,10 +119,10 @@ _J(X)_, the Jacobian MxN-matrix dFi/dXj.
 <p><strong>ENTRUST</strong> provides four solution algorithms for the user:</p>
 
 <blockquote>
-<pre><code>'newton', (optimization only), iteratively modify _X_ by solving _H_*_dX_=-_G_;
-'secant', (optimization only), same as newton, but _J_ or _H_ is approximated by finite differences. (This is the default method.)
-'steepest_descent', iteratively modify _X_ by solving for the direction of steepest descent, and performing line search to determine a good step size;
-'gauss_newton', (nonlinear least squares only), given M functions _R_(_X_) in N variables, seek to minimize _F=1/2*R'*R_ by iteratively computing _J'*J*dX=-J'*R_; converges when minimum value of _F_ is zero.
+<pre><code>'newton', (optimization only), iteratively modify X by solving H dX =-G;
+'secant', (optimization only), same as newton, but J or H is approximated by finite differences. (This is the default method.)
+'steepest_descent', iteratively modify X by solving for the direction of steepest descent, and performing line search to determine a good step size;
+'gauss_newton', (nonlinear least squares only), given M functions R(X) in N variables, seek to minimize F=1/2*R'*R by iteratively computing J'*J*dX=-J'*R; converges when minimum value of F is zero.
 </code></pre>
 </blockquote>
 
