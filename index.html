@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Entrust by jborggaard</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Entrust</h1>
+        <p>Trust-Region Optimization in Matlab (allows for bound constraints on design variables)</p>
+        <p class="view"><a href="https://github.com/jborggaard/entrust">View the Project on GitHub <small>jborggaard/entrust</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jborggaard/entrust/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jborggaard/entrust/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jborggaard/entrust">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <hr><p></p>ENTRUST
+Optimization Using Trust Region Methods
+
+<hr><p><strong>ENTRUST</strong> is a library of MATLAB routines which implement a variety of algorithms for finding a vector <em>X</em> which minimizes the value of a scalar function <em>F(X)</em>.</p>
+
+<p><strong>ENTRUST</strong> is a driver for the solution of an unconstrained optimization problem using line search or trust-region globalization strategies and several types of secant update strategies.</p>
+
+<p><strong>ENTRUST</strong> also includes the capability to handle least-squares problems, in which a vector <em>X</em> is sought which minimizes the sum of squares of the components of a nonlinear vector function <em>R(X)</em>.</p>
+
+<p>Both optimization and nonlinear minimization can also be performed with "box constraints," which require the solution to lie within a specified rectangular region. These constraints are incorporated into the trust-region algorithm.</p>
+
+<h2>The Scalar Optimization Problem</h2>
+
+<p>For problems in scalar optimization, we're seeking a vector <em>X</em> which minimizes the value of the scalar functional <em>F(X)</em>.</p>
+
+<p>Related versions of this problem try to maximize <em>F(X)</em>, or restrict the range of acceptable <em>X</em> to some rectangular region. <strong>ENTRUST</strong> can handle these related problems if the user requests them.</p>
+
+<p>To specify an optimization problem, we assume we have</p>
+
+<blockquote>
+<pre><code>_X_, an N-vector of independent variables;
+_F(X)_, a scalar functional;
+_G(X)_, the gradient N-vector dF/dXi;
+_H(X)_, the Hessian NxN-matrix d2F/dXidXj.
+</code></pre>
+</blockquote>
+
+<p>and, given a starting estimate <em>X0</em> for the minimizer, we seek a vector <em>X*</em> which minimizes the value <em>F(X*)</em>.</p>
+
+<h2>Linear and Nonlinear Least Squares</h2>
+
+<p>In least-squares problems, we're seeking a vector <em>X</em> which minimizes the Euclidean norm of a vector of functions <em>R(X)</em>. The dimension of <em>X</em> is denoted by N whereas the dimension of <em>R</em> is denoted by M. Often M is larger, even much larger, than N.</p>
+
+<p>A common source of such problems occurs in data fitting. For example, we might seek the coefficients <em>A</em> and <em>B</em> of a linear model - a line in the plane that comes closest to M pairs of data values. Here N will be 2 (the two unknown coefficients), but M, the number of data pairs, can be much larger. This generalizes to polynomial models; a polynomial of degree N-1 requires N unknown coefficients, which will play the role of the vector <em>X</em>. In such cases, the residual vector <em>R(X)</em> is actually linear in the parameters, and we have a linear least squares problem.</p>
+
+<p>To specify a problem in least squares, we assume we have:</p>
+
+<blockquote>
+<pre><code>_X_, an N-vector of independent variables;
+_R(X)_, an M-vector of nonlinear functions;
+_J(X)_, the Jacobian MxN-matrix dFi/dXj.
+</code></pre>
+</blockquote>
+
+<p>and, given a starting estimate <em>X0</em> of the minimizer, we seek a vector <em>X*</em> which minimizes the sum of the squares of the entries of <em>R(X*)</em>.</p>
+
+<h2>Optimization versus Least Squares</h2>
+
+<p>The Optimization and Nonlinear Least Squares problems are related, though not equivalent.</p>
+
+<p>If we have a least squares problem (_R_ and <em>J</em>), we can create a corresponding optimization problem. We simply define</p>
+
+<pre><code>_F(X)_ = sum ( 1 &lt;= i &lt;= M ) _Ri_(_X_)2 
+</code></pre>
+
+<p>Certainly, minimizing <em>F</em> will minimize the sum of squares of the entries of <em>R</em>.</p>
+
+<p>If we have an optimization problem (_F_, <em>G</em> and <em>H</em>), we can create a related least squares problem. We simply define</p>
+
+<pre><code>_R_(_X_) = _G_(_X_) 
+</code></pre>
+
+<p>Note that for this least squares problem, we will have M=N. We minimize the norm of <em>R</em>(_X_), and if this minimum norm is zero, we have a critical point of our optimization function <em>F</em>; however, the critical point is not a guaranteed minimizer of <em>F</em>, though for some problems, there is extra information that can tell us we have, indeed, found a minimizer.</p>
+
+<h2>Solving a Problem using <strong>ENTRUST</strong>
+</h2>
+
+<p>To solve a problem, the user must first encode the information that defines the problem.</p>
+
+<p>For an optimization problem, write a MATLAB "FGH" M-file of the form</p>
+
+<p><code>[ f, g, H ] = fname ( x, flag )</code></p>
+
+<p>which returns the values of the optimization function, gradient vector, and Hessian matrix evaluated at <em>x</em>. (The input value flag should generally be defined to be the empty value, that is, "flag=[]".) The value of the Hessian is only needed when a Newton method is being used. Otherwise, the M-file does not need to compute the Hessian, and can simply return an empty value.</p>
+
+<p>For a least squares problem, write a MATLAB "RJ" M-file of the form</p>
+
+<p><code>[ r, J ] = fname ( x, flag )</code></p>
+
+<p>which returns the values of the nonlinear functions and the Jacobian evaluated at <em>x</em>. (The input value flag should generally be defined to be the empty value, that is, "flag=[]".)</p>
+
+<p>The user must also set an initial value for the solution estimate <em>X0</em>. If no estimate is known, it is acceptable to set <em>X0</em> to zero, but note that changing the initial value can cause the optimization code to converge quickly, very slowly, or to fail to converge. In some cases, changing the initial value can mean that the program converges, but to an entirely different solution with a different optimal value.</p>
+
+<p>Once the problem definition has been taken care of, it is necessary to choose a solution algorithm, and, if desired, to change some of the solution parameters from their default value. All information about the solution algorithm is contained in a single MATLAB structure called options, and any choice the user makes is recorded in this single quantity. The first thing the user should do is "zero out" this quantity, so that it starts with all default values:</p>
+
+<p><code>options = [];</code></p>
+
+<p><strong>ENTRUST</strong> provides four solution algorithms for the user:</p>
+
+<blockquote>
+<pre><code>'newton', (optimization only), iteratively modify _X_ by solving _H_*_dX_=-_G_;
+'secant', (optimization only), same as newton, but _J_ or _H_ is approximated by finite differences. (This is the default method.)
+'steepest_descent', iteratively modify _X_ by solving for the direction of steepest descent, and performing line search to determine a good step size;
+'gauss_newton', (nonlinear least squares only), given M functions _R_(_X_) in N variables, seek to minimize _F=1/2*R'*R_ by iteratively computing _J'*J*dX=-J'*R_; converges when minimum value of _F_ is zero.
+</code></pre>
+</blockquote>
+
+<p>To choose a solution algorithm, the user sets the method component of the options structure. A typical command would be:</p>
+
+<p><code>options.method = 'newton';</code></p>
+
+<p>It's probably a good idea to try to run the problem once without specifying any of the other components of options. The results of the first run, if unsatisfactory, can then be used as a guide for determining how to adjust some values of options to get a better result. Typical values that might be changed on a second run would involve requesting that step by step details be printed out:</p>
+
+<p><code>options.verbose = 1;</code></p>
+
+<p>increasing the number of times the function routine can be evaluated:</p>
+
+<p><code>options.max_fevals = 50;</code></p>
+
+<p>lowering the tolerance on the norm of the gradient vector, to ask for a tighter convergence criterion:</p>
+
+<p><code>options.gradient_tolerance = 0.00000001;</code></p>
+
+<p>And of course, there are a number of other parameters that may be adjusted.</p>
+
+<h2>Example:</h2>
+
+<p>To seek a minimizer for</p>
+
+<blockquote>
+<p>f(x) = (x1-2)4+((x1-2)*x2)2+(x2+1)2 </p>
+</blockquote>
+
+<p>we write an FGH routine of the form:</p>
+
+<p>`      function [ f, g, H ] = test_fgh ( x, flag )</p>
+
+<pre><code>  f = ( x(1) - 2 )^4...
+    + ( ( x(1) - 2 ) * x(2) )^2...
+    + ( x(2) + 1 )^2;
+
+  g(1) = 4 * ( x(1) - 2 )^3 ...
+       + 2 * ( x(1) - 2 ) * x(2)^2;
+
+  g(2) = 2 * ( x(1) - 2 )^2 * x(2)...
+       + 2 * ( x(2) + 1 );
+
+  H = []; `
+</code></pre>
+
+<p>We are setting the Hessian matrix <em>H</em> to an empty value. We do not intend to use a Newton method, so the Hessian is not needed.</p>
+
+<p>Assuming that our starting point is (1,2), we now issue the following commands:</p>
+
+<p>`        fname = 'test_fgh';</p>
+
+<pre><code>    x0 = [ 1; 2 ];
+
+    options = [];
+    options.method = 'secant';
+
+    x = entrust ( fname, x0, options );`
+</code></pre>
+
+<p>Note that you can also use the "at sign" to refer to the function directly:</p>
+
+<p><code>x = entrust ( @test_fgh, x0, options );</code></p>
+
+<h2>The options structure:</h2>
+
+<p>ENTRUST has a default solution procedure, but it allows the user to control the computation by overriding the default values of solution parameters. The solution procedure is specified in a MATLAB structure called options, which is the third input argument.</p>
+
+<p>The user should always initialize options to its default value, by a command like:</p>
+
+<p><code>options = [];</code></p>
+
+<p>Then the user can specify particular solution parameters by assigning components of options. For instance, options has a component called options.method that specifies the algorithm to be used. This defaults to 'secant'. Here is how a different algorithm can be chosen:</p>
+
+<p><code>options.method = 'newton';</code></p>
+
+<p>The most common components to be changed include the method, gradient_tolerance, max_iterations and max_fevals. The scripts that run the examples include many cases where components are varied.</p>
+
+<p>General options:</p>
+
+<p>options.free_g
+    Flag that determines whether or not the gradient G is calculated simultaneously with F;
+    default: options.free_g = 1; 
+options.goal
+    Goal of the problem, supported options include: 'minimization' and 'maximization';
+    default: options.goal = 'minimization'; 
+options.method
+    Type of optimization method, supported options include: 'newton', 'secant', 'steepest_descent', and 'gauss_newton';
+    default: options.method = 'secant'; 
+options.scale_x
+    a vector of length (n_desvar) which contains typical values for the design parameters;
+    default: options.scale_x = ones(n_desvar,1); 
+options.scale_f
+    A typical magnitude of the objective function;
+    default: options.scale_f = 1.0; 
+options.verbose
+    Output flag 0 - no output, 1 - print output;
+    default: options.verbose = 1; 
+options.x_lower
+    a vector of length (n_desvar) which contains lower bounds for the design variables;
+    default: options.x_lower =-realmax; 
+options.x_upper
+    a vector of length (n_desvar) which contains upper bounds for the design variables;
+    default: options.x_upper = realmax; </p>
+
+<p>Stopping criteria:</p>
+
+<p>options.gradient_tolerance
+    Value of the gradient for which convergence is declared;
+    default: options.gradient_tolerance = 0.00001; 
+options.max_iterations
+    Maximum number of main iterations in the optimization;
+    default: options.max_iterations = 10; 
+options.max_fevals
+    Maximum number of calls to 'fname';
+    default: options.max_fevals = 30; 
+options.step_tolerance
+    Value of the change in parameter values for which convergence is declared. May not occur at a local minimum;
+    default: options.step_tolerance = 0.00001; </p>
+
+<p>Globalization criteria:</p>
+
+<p>options.globalization
+    Method used to perform globalization, supported options include: 'line_search', 'trust_region' and 'none';
+    default: options.globalization = 'none'; 
+options.max_step
+    Maximum 'trust_region' radius or line search step; 
+options.alpha
+    (for 'line_search' globalization);
+    default: options.alpha = 0.0001, see D&amp;S, p. 126; 
+options.tr_radius
+    (for 'trust_region' globalization) Initial 'trust_region' radius;
+    default: obtained through Cauchy step; </p>
+
+<h2>Examples:</h2>
+
+<p>There are a number of example problems available. Most are available in two versions, as an optimization "FGH" problem and as a nonlinear least squares "RJ" problem:</p>
+
+<pre><code>1.) M = N = 2, "Dennis and Schnabel #1".
+2.) M = N = 2, "Dennis and Schnabel #2".
+3.) M = 3, N = 1, "Dennis and Schnabel #3".
+4.) M = 2, N = 2, "Himmelblau function".
+5.) M = N = 2, "the Rosenbrock banana function"
+6.) M = N = arbitrary multiple of 2, "the extended Rosenbrock function".
+7.) M = N = 3, "the helical valley function".
+8.) M = N = arbitrary multiple of 4, "the extended Powell singular function"
+9.) M = N = arbitrary, "the trigonometric function".
+10.) M = 6, N = 4, "the Wood function".
+11.) M = N = 3, "the box-constrained quartic"
+12.) M = 3, N = 2, "the Beale function"
+13.) M = 2, N = 2, "the localmin function"
+14.) M = N = 3, "polynomial".
+15.) M = N = 2, "a test case".
+</code></pre>
+
+<p>Author:</p>
+
+<p>Jeff Borggaard,
+Gene Cliff,
+Virginia Tech.
+Reference:</p>
+
+<pre><code>John Dennis, Robert Schnabel,
+Numerical Methods for Unconstrained Optimization and Nonlinear Equations,
+SIAM, 1996,
+ISBN13: 978-0-898713-64-0,
+LC: QA402.5.D44.
+David Himmelblau,
+Applied Nonlinear Programming,
+McGraw Hill, 1972,
+ISBN13: 978-0070289215,
+LC: T57.8.H55.
+Jorge More, Burton Garbow, Kenneth Hillstrom,
+Testing unconstrained optimization software,
+ACM Transactions on Mathematical Software,
+Volume 7, Number 1, March 1981, pages 17-41.
+Jorge More, Burton Garbow, Kenneth Hillstrom,
+Algorithm 566: FORTRAN Subroutines for Testing unconstrained optimization software,
+ACM Transactions on Mathematical Software,
+Volume 7, Number 1, March 1981, pages 136-140.
+</code></pre>
+
+<p>Source Code:</p>
+
+<pre><code>entrust.m the optimization code.
+</code></pre>
+
+<p>Examples and Tests:</p>
+
+<p>OPT01 is Dennis and Schnabel example 1, with M=N=2.</p>
+
+<pre><code>opt01_fgh.m evaluates F, G and H for optimization.
+opt01_rj.m evaluates R and J for least squares.
+opt01_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt01_output.txt the output file.
+</code></pre>
+
+<p>OPT02 is Dennis and Schnabel example 2, with M=N=2.</p>
+
+<pre><code>opt02_fgh.m evaluates F, G and H for optimization.
+opt02_rj.m evaluates R and J for least squares.
+opt02_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt02_output.txt the output file.
+</code></pre>
+
+<p>OPT03 is Dennis and Schnabel example 3 with M=3, N=1. It includes a parameter which allows the problem to be changed so that the optimum value of F is zero or nonzero. This demonstrates how the Gauss-Newton procedure can be made to fail.</p>
+
+<pre><code>opt03_fgh.m evaluates F, G and H for optimization.
+opt03_rj.m evaluates R and J for least squares.
+opt03_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt03_output.txt the output file.
+</code></pre>
+
+<p>OPT04 is the Himmelblau function, with M=2, N=2. The function has four global minima, where F=0. In the demonstration, the Newton method goes to one minimum, the secant method fails, and the Gauss-Newton method reaches a different minimum from the same initial point.</p>
+
+<pre><code>opt04_fgh.m evaluates F, G and H for optimization.
+opt04_rj.m evaluates R and J for least squares.
+opt04_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt04_output.txt the output file.
+</code></pre>
+
+<p>OPT05 is the Rosenbrock "banana" function, with M = N = 2.</p>
+
+<pre><code>opt05_fgh.m evaluates F, G and H for optimization.
+opt05_rj.m evaluates R and J for least squares.
+opt05_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt05_output.txt the output file.
+</code></pre>
+
+<p>OPT06 is the extended Rosenbrock "banana" function, with M=N=arbitary multiple of 2.</p>
+
+<pre><code>opt06_fgh.m evaluates F, G and H for optimization.
+opt06_rj.m evaluates R and J for least squares.
+opt06_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt06_output.txt the output file.
+</code></pre>
+
+<p>OPT07 is the helical valley function, with M=N=3.</p>
+
+<pre><code>opt07_fgh.m evaluates F, G and H for optimization.
+opt07_rj.m evaluates R and J for least squares.
+opt07_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt07_output.txt the output file.
+</code></pre>
+
+<p>OPT08 is the extended Powell singular function, with M=N=an arbitrary multiple of 4.</p>
+
+<pre><code>opt08_fgh.m evaluates F, G and H for optimization.
+opt08_rj.m evaluates R and J for least squares.
+opt08_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt08_output.txt the output file.
+</code></pre>
+
+<p>OPT09 is the trigonometric function, with M=N=arbitrary.</p>
+
+<pre><code>opt09_fgh.m evaluates F, G and H for optimization.
+opt09_rj.m evaluates R and J for least squares.
+opt09_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt09_output.txt the output file.
+</code></pre>
+
+<p>OPT10 is the Wood function, with M=6 and N=4.</p>
+
+<pre><code>opt10_fgh.m evaluates F, G and H for optimization.
+opt10_rj.m evaluates R and J for least squares.
+opt10_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt10_output.txt the output file.
+</code></pre>
+
+<p>OPT11 is the box-constrained quartic, with M=N=3.</p>
+
+<pre><code>opt11_fgh.m evaluates F, G and H for optimization.
+opt11_rj.m evaluates R and J for least squares.
+opt11_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt11_output.txt the output file.
+</code></pre>
+
+<p>OPT12 is the Beale function, with M=3 and N=2. Convergence is relatively easy with the starting point [1,1], but hard to achieve with [1,4].</p>
+
+<pre><code>opt12_fgh.m evaluates F, G and H for optimization.
+opt12_rj.m evaluates R and J for least squares.
+opt12_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt12_output.txt the output file.
+</code></pre>
+
+<p>OPT13 is a polynomial example, with M=N=2. It has a local minimum for which F is about 5, and a global minimum for which F is 0.</p>
+
+<pre><code>opt13_fgh.m evaluates F, G and H for optimization.
+opt13_rj.m evaluates R and J for least squares.
+opt13_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt13_output.txt the output file.
+</code></pre>
+
+<p>OPT14 is a polynomial example, with M=N=3.</p>
+
+<pre><code>opt14_fgh.m evaluates F, G and H for optimization.
+opt14_rj.m evaluates R and J for least squares.
+opt14_run.m calls ENTRUST to solve the optimization and nonlinear least squares problems.
+opt14_output.txt the output file.
+</code></pre>
+
+<p>OPT15 is a test case, with M=N=2.</p>
+
+<pre><code>opt15_fgh.m evaluates F, G and H for optimization.
+opt15_run.m calls ENTRUST to solve the optimization problem.
+opt15_output.txt the output file.
+</code></pre>
+
+<h2>Related Data and Programs:</h2>
+
+<p>ASA047 is a FORTRAN77 library which minimizes a scalar function of several variables using the Nelder-Mead algorithm.</p>
+
+<p>DQED a FORTRAN90 library which solves constrained least squares problems.</p>
+
+<p>COORDINATE_SEARCH is a MATLAB program which minimizes a scalar function of several variables using the coordinate search algorithm.</p>
+
+<p>fminsearch is a MATLAB built in command which minimizes a scalar function of several variables using the Nelder-Mead algorithm.</p>
+
+<p>MINPACK a FORTRAN90 library which solves systems of nonlinear equations, or the least squares minimization of the residual of a set of linear or nonlinear equations.</p>
+
+<p>NELDER_MEAD a MATLAB program which minimizes a scalar function of multiple variables using the Nelder-Mead algorithm.</p>
+
+<p>NL2SOL a FORTRAN90 library which implements an adaptive nonlinear least-squares algorithm.</p>
+
+<p>PRAXIS a FORTRAN90 library which minimizes a scalar function of several variables, without derivative information.</p>
+
+<p>TEST_NLS a FORTRAN90 library which defines test problems requiring the least squares minimization of a set of nonlinear functions.</p>
+
+<p>TEST_OPT a FORTRAN90 library which defines test problems requiring the minimization of a scalar function of several variables.</p>
+
+<p>TOMS178 a MATLAB library which optimizes a scalar functional of multiple variables using the Hooke-Jeeves method.</p>
+
+<p>TOMS611 a FORTRAN90 library which optimizes a scalar functional of multiple variables.</p>
+
+<p>UNCMIN is a FORTRAN77 library which can be used to seek the minimizer of a scalar functional of multiple variables.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/jborggaard">jborggaard</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
