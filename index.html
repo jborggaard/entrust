@@ -153,9 +153,9 @@ J(X), the Jacobian MxN-matrix dFi/dXj.
 
 <p>we write an FGH routine of the form:</p>
 
-<p>`      function [ f, g, H ] = test_fgh ( x, flag )</p>
+<pre><code>function [ f, g, H ] = test_fgh ( x, flag )</p>
 
-<pre><code>  f = ( x(1) - 2 )^4...
+  f = ( x(1) - 2 )^4...
     + ( ( x(1) - 2 ) * x(2) )^2...
     + ( x(2) + 1 )^2;
 
@@ -165,21 +165,22 @@ J(X), the Jacobian MxN-matrix dFi/dXj.
   g(2) = 2 * ( x(1) - 2 )^2 * x(2)...
        + 2 * ( x(2) + 1 );
 
-  H = []; `
+  H = []; 
+end
 </code></pre>
 
 <p>We are setting the Hessian matrix <em>H</em> to an empty value. We do not intend to use a Newton method, so the Hessian is not needed.</p>
 
 <p>Assuming that our starting point is (1,2), we now issue the following commands:</p>
 
-<p>`        fname = 'test_fgh';</p>
+<pre><code>    fname = 'test_fgh';</p>
 
-<pre><code>    x0 = [ 1; 2 ];
+    x0 = [ 1; 2 ];
 
     options = [];
     options.method = 'secant';
 
-    x = entrust ( fname, x0, options );`
+    x = entrust ( fname, x0, options );
 </code></pre>
 
 <p>Note that you can also use the "at sign" to refer to the function directly:</p>
@@ -192,11 +193,11 @@ J(X), the Jacobian MxN-matrix dFi/dXj.
 
 <p>The user should always initialize options to its default value, by a command like:</p>
 
-<p><code>options = [];</code></p>
+<pre><code>options = [];</code></pre>
 
 <p>Then the user can specify particular solution parameters by assigning components of options. For instance, options has a component called options.method that specifies the algorithm to be used. This defaults to 'secant'. Here is how a different algorithm can be chosen:</p>
 
-<p><code>options.method = 'newton';</code></p>
+<pre><code>options.method = 'newton';</code></pre>
 
 <p>The most common components to be changed include the method, gradient_tolerance, max_iterations and max_fevals. The scripts that run the examples include many cases where components are varied.</p>
 
