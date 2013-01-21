@@ -231,32 +231,34 @@ end
 
 <p>Stopping criteria:</p>
 
-<p>options.gradient_tolerance
-    Value of the gradient for which convergence is declared;
-    default: options.gradient_tolerance = 0.00001; 
-options.max_iterations
-    Maximum number of main iterations in the optimization;
-    default: options.max_iterations = 10; 
-options.max_fevals
-    Maximum number of calls to 'fname';
-    default: options.max_fevals = 30; 
-options.step_tolerance
-    Value of the change in parameter values for which convergence is declared. May not occur at a local minimum;
-    default: options.step_tolerance = 0.00001; </p>
+<ul><li>options.gradient_tolerance</li>
+    <p>Value of the gradient for which convergence is declared;</p>
+    <p>default: options.gradient_tolerance = 0.00001; </p>
+<li>options.max_iterations</li>
+    <p>Maximum number of main iterations in the optimization;</p>
+    <p>default: options.max_iterations = 10; </p>
+<li>options.max_fevals</li>
+    <p>Maximum number of calls to 'fname';</p>
+    <p>default: options.max_fevals = 30; </p>
+<li>options.step_tolerance</li>
+    <p>Value of the change in parameter values for which convergence is declared. May not occur at a local minimum;</p>
+    <p>default: options.step_tolerance = 0.00001; </p>
+</ul>
 
 <p>Globalization criteria:</p>
 
-<p>options.globalization
-    Method used to perform globalization, supported options include: 'line_search', 'trust_region' and 'none';
-    default: options.globalization = 'none'; 
-options.max_step
-    Maximum 'trust_region' radius or line search step; 
-options.alpha
-    (for 'line_search' globalization);
-    default: options.alpha = 0.0001, see D&amp;S, p. 126; 
-options.tr_radius
-    (for 'trust_region' globalization) Initial 'trust_region' radius;
-    default: obtained through Cauchy step; </p>
+<ul><li>options.globalization</li>
+    <p>Method used to perform globalization, supported options include: 'line_search', 'trust_region' and 'none';</p>
+    <p>default: options.globalization = 'none'; </p>
+<li>options.max_step</li>
+    <p>Maximum 'trust_region' radius or line search step; </p>
+<li>options.alpha</li>
+    <p>(for 'line_search' globalization);</p>
+    <p>default: options.alpha = 0.0001, see D&amp;S, p. 126; </p>
+<li>options.tr_radius</li>
+    <p>(for 'trust_region' globalization) Initial 'trust_region' radius;</p>
+    <p>default: obtained through Cauchy step; </p>
+</ul>
 
 <h3>Examples:</h3>
 
@@ -279,32 +281,35 @@ options.tr_radius
 15.) M = N = 2, "a test case".
 </code></pre>
 
-<p>Author:</p>
+<p>Authors:</p>
 
-<p>Jeff Borggaard,
-Gene Cliff,
-Virginia Tech.
-Reference:</p>
+<p>Jeff Borggaard and Gene Cliff,
+Virginia Tech.</p>
 
-<pre><code>John Dennis, Robert Schnabel,
+<p>References:</p>
+
+<pre>John Dennis, Robert Schnabel,
 Numerical Methods for Unconstrained Optimization and Nonlinear Equations,
 SIAM, 1996,
 ISBN13: 978-0-898713-64-0,
-LC: QA402.5.D44.
-David Himmelblau,
+LC: QA402.5.D44.</pre>
+
+<pre>David Himmelblau,
 Applied Nonlinear Programming,
 McGraw Hill, 1972,
 ISBN13: 978-0070289215,
-LC: T57.8.H55.
-Jorge More, Burton Garbow, Kenneth Hillstrom,
+LC: T57.8.H55.</pre>
+
+<pre>Jorge More, Burton Garbow, Kenneth Hillstrom,
 Testing unconstrained optimization software,
 ACM Transactions on Mathematical Software,
-Volume 7, Number 1, March 1981, pages 17-41.
+Volume 7, Number 1, March 1981, pages 17-41.</pre>
+
+<pre>
 Jorge More, Burton Garbow, Kenneth Hillstrom,
 Algorithm 566: FORTRAN Subroutines for Testing unconstrained optimization software,
 ACM Transactions on Mathematical Software,
-Volume 7, Number 1, March 1981, pages 136-140.
-</code></pre>
+Volume 7, Number 1, March 1981, pages 136-140.</pre>
 
 <p>Source Code:</p>
 
