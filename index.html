@@ -148,7 +148,7 @@ J(X), the Jacobian MxN-matrix dFi/dXj.
 <p>To seek a minimizer for</p>
 
 <blockquote>
-<p>f(x) = (x1-2)4+((x1-2)*x2)2+(x2+1)2 </p>
+<p>f(x) = (x1-2)<sup>4</sup>+((x1-2)*x2)<sup>2</sup>+(x2+1)<sup>2</sup> </p>
 </blockquote>
 
 <p>we write an FGH routine of the form:</p>
@@ -203,30 +203,31 @@ end
 
 <p>General options:</p>
 
-<p>options.free_g
-    Flag that determines whether or not the gradient G is calculated simultaneously with F;
-    default: options.free_g = 1; 
-options.goal
-    Goal of the problem, supported options include: 'minimization' and 'maximization';
-    default: options.goal = 'minimization'; 
-options.method
-    Type of optimization method, supported options include: 'newton', 'secant', 'steepest_descent', and 'gauss_newton';
-    default: options.method = 'secant'; 
-options.scale_x
-    a vector of length (n_desvar) which contains typical values for the design parameters;
-    default: options.scale_x = ones(n_desvar,1); 
-options.scale_f
-    A typical magnitude of the objective function;
-    default: options.scale_f = 1.0; 
-options.verbose
-    Output flag 0 - no output, 1 - print output;
-    default: options.verbose = 1; 
-options.x_lower
-    a vector of length (n_desvar) which contains lower bounds for the design variables;
-    default: options.x_lower =-realmax; 
-options.x_upper
-    a vector of length (n_desvar) which contains upper bounds for the design variables;
-    default: options.x_upper = realmax; </p>
+<ul><li>options.free_g</li>
+    <p>Flag that determines whether or not the gradient G is calculated simultaneously with F;</p>
+    <p>default: options.free_g = 1; </p>
+<li>options.goal</li>
+    <p>Goal of the problem, supported options include: 'minimization' and 'maximization';</p>
+    <p>default: options.goal = 'minimization'; </p>
+<li>options.method</li>
+    <p>Type of optimization method, supported options include: 'newton', 'secant', 'steepest_descent', and 'gauss_newton';</p>
+    <p>default: options.method = 'secant'; </p>
+<li>options.scale_x</li>
+    <p>a vector of length (n_desvar) which contains typical values for the design parameters;</p>
+    <p>default: options.scale_x = ones(n_desvar,1);</p> 
+<li>options.scale_f</li>
+    <p>A typical magnitude of the objective function;</p>
+    <p>default: options.scale_f = 1.0;</p> 
+<li>options.verbose</li>
+    <p>Output flag 0 - no output, 1 - print output;</p>
+    <p>default: options.verbose = 1; </p>
+<li>options.x_lower</li>
+    <p>a vector of length (n_desvar) which contains lower bounds for the design variables;</p>
+    <p>default: options.x_lower =-realmax; </p>
+<li>options.x_upper</li>
+    <p>a vector of length (n_desvar) which contains upper bounds for the design variables;</p>
+    <p>default: options.x_upper = realmax; </p>
+</ul>
 
 <p>Stopping criteria:</p>
 
