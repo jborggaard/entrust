@@ -37,7 +37,7 @@
 
 <p><strong>entrust</strong> also includes the capability to handle least-squares problems, in which a vector <em>X</em> is sought which minimizes the sum of squares of the components of a nonlinear vector function <em>R(X)</em>.</p>
 
-<p>Both optimization and nonlinear minimization can also be performed with "box constraints," which require the solution to lie within a specified rectangular region. These constraints are incorporated into the trust-region algorithm.</p>
+<p>Both optimization and nonlinear least-squares can also be performed with "box constraints," which require the solution to lie within a specified rectangular region. These constraints are incorporated into the trust-region algorithm.</p>
 
 <h3>The Scalar Optimization Problem</h3>
 
@@ -183,7 +183,7 @@ end
     x = entrust ( fname, x0, options );
 </code></pre>
 
-<p>Note that you can also use the "at sign" to refer to the function directly:</p>
+<p>Note that you can also use the "at symbol" to refer to the function directly:</p>
 
 <p><code>x = entrust ( @test_fgh, x0, options );</code></p>
 
