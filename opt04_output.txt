@@ -8,7 +8,7 @@ Optimization required 13 function/gradient evaluations
 
 Newton method produced (3.5844283e+00,-1.8481265e+00)
 
-Value of F(X) = 0.000000
+Value of F(X) = 0.0000000e+00
 
 Use the secant method:
   (Algorithm likely to fail!)
@@ -16,9 +16,10 @@ Use the secant method:
 Maximum number of iterations reached
 Optimization required 16 function/gradient evaluations
 
-BFGS   method produced (-4.1909208e+01,-4.3909253e+01)
+BFGS   method produced (-3.9993423e+01,-4.1993466e+01)
 
-Value of F(X) = 6426075.061546
+Value of F(X) = 5.3378287e+06
+
 ---------------------------------------------------------
 Running testcase_4 as least squares problem: 
 ---------------------------------------------------------
@@ -27,5 +28,4 @@ Optimization required 7 function/gradient evaluations
 
 Gauss-Newton produced  (3.0000000e+00, 2.0000000e+00)
 
-Norm of RES(X) = 0.000000
->> 
+Norm of RES(X) = 0.0000000e+00

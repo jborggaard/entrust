@@ -57,7 +57,7 @@ function [ f, g, H ] = opt01_fgh ( x, flag )
 %
 %    Output, real H(2,2), the Hessian matrix.
 %
-  fprintf ( 1, 'FLAG = %s\n', flag );
+%  fprintf ( 1, 'FLAG = %s\n', flag );
 
   n = length ( x );
 

@@ -9,4 +9,4 @@ Optimization required 24 function/gradient evaluations
 
 Newtons method produced  (7.4729771e-01,7.4729771e-01)
 
-Value of F(X) = -1.484712
+Value of F(X) = -1.4847122e+00

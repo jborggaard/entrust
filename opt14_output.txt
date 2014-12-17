@@ -8,10 +8,14 @@ Optimization required 12 function/gradient evaluations
 
 Newtons method produced  (-7.0710681e-01,7.0710678e-01,-2.8284270e+00)
 
+Value of F(X) = 3.0057829e-16
+
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 19 function/gradient evaluations
 
 Newtons method produced  (7.0710678e-01,-7.0710678e-01,2.8284271e+00)
+
+Value of F(X) = 3.9330740e-22
 
 ---------------------------------------------------------
 Running testcase_14 as least squares problem: 
@@ -22,11 +26,11 @@ Optimization required 7 function/gradient evaluations
 
 Gauss-Newton produced  (-7.0710678e-01, 7.0710678e-01, -2.8284271e+00)
 
-Norm of F(X) = 0.000000
+Norm of RES(X) = 8.8817842e-16
+
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 8 function/gradient evaluations
 
 Gauss-Newton produced  (7.0710678e-01, -7.0710678e-01, 2.8284271e+00)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 8.8817842e-16

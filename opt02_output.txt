@@ -11,11 +11,15 @@ Optimization required 11 function/gradient evaluations
 
 Line search produced  (4.9920027e-22,2.8451312e-160)
 
+Value of F(X) = 2.4920091e-43
+
 Trust Region:
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 11 function/gradient evaluations
 
 Trust region produced (2.3921860e-18,0.0000000e+00)
+
+Value of F(X) = 5.7225537e-36
 
 ---------------------------------------------------------
 Running testcase_2 as least squares problem: 
@@ -26,5 +30,4 @@ Optimization required 5 function/gradient evaluations
 
 Gauss-Newton produced  (2.1428111e-14, 0.0000000e+00)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 2.1428111e-14

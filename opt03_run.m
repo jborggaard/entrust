@@ -40,7 +40,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  This run should require about 9 iterations.
 %
@@ -54,7 +54,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  This run should require about 10 iterations.
 %
@@ -68,7 +68,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  This run should require about 12 iterations.
 %
@@ -82,7 +82,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  This run should require about 12 iterations.
 %
@@ -96,7 +96,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  This run should require about 5 iterations.
 %
@@ -110,7 +110,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Newton produced  (%10.7e)\n',x(1))
   f = opt03_fgh ( x, 'f', p );
-  fprintf('Value of F(X) = %f\n', f );
+  fprintf('Value of F(X) = %10.7e\n\n', f );
 
 %---------------------------------------------------------------------
 %  Running testcase, from D+S, pp. 225-6, 231;
@@ -140,7 +140,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 %
 %  This run should require about 12 iterations.
 %
@@ -154,7 +154,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 %
 %  This run should not converge
 %
@@ -168,7 +168,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 %
 %  This run should not converge.
 %
@@ -182,7 +182,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 %
 %  This run should not converge.
 %
@@ -196,7 +196,7 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 %
 %  This run should require about 9 steps.
 %
@@ -210,4 +210,4 @@
   x = entrust ( fname, x0, options, p );
   fprintf('Gauss-Newton produced  (%10.7e)\n',x(1))
   [ res, jac ] = opt03_rj ( x, 'f', p );
-  fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+  fprintf('Norm of RES(X) = %10.7e\n', norm ( res ) );

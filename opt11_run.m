@@ -28,7 +28,7 @@
    fprintf('Trust-region produced [%10.7e,%10.7e,%10.7e)\n\n',...
       x(1),x(2),x(3))
    f = opt11_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
    
    fprintf('Newton (constrained x>=1):\n')
    fprintf('Running testcase_11: (constrained)    solution (1, 0, 0)\n')
@@ -37,7 +37,7 @@
    fprintf('Trust-region produced [%10.7e,%10.7e,%10.7e)\n\n',...
       x(1),x(2),x(3))
    f = opt11_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
@@ -61,4 +61,4 @@
    fprintf('Gauss-Newton produced (%8.5e,%8.5e,%8.5e)\n\n',...
      x(1),x(2),x(3))
    [ res, jac ] = opt11_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n', norm ( res ) );

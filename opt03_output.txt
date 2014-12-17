@@ -1,6 +1,6 @@
 >> opt03_run
 ---------------------------------------------------------
-Running testcase_3: 
+NEWTON applied to F,G,H optimization system:
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -10,7 +10,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 8 function/gradient evaluations
 
 Newton produced  (6.9314718e-01)
-Value of F(X) = 0.000000
+Value of F(X) = 1.5777218e-30
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -20,7 +21,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 10 function/gradient evaluations
 
 Newton produced  (4.4004986e-01)
-Value of F(X) = 1.638993
+Value of F(X) = 1.6389928e+00
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -30,7 +32,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 11 function/gradient evaluations
 
 Newton produced  (4.4743984e-02)
-Value of F(X) = 6.976461
+Value of F(X) = 6.9764611e+00
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -40,7 +43,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 12 function/gradient evaluations
 
 Newton produced  (-3.7192873e-01)
-Value of F(X) = 16.434978
+Value of F(X) = 1.6434978e+01
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -50,7 +54,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 13 function/gradient evaluations
 
 Newton produced  (-7.9148634e-01)
-Value of F(X) = 41.144822
+Value of F(X) = 4.1144822e+01
+
 ---------------------------------------------------------
 
   Start X0 = 0.500000
@@ -60,9 +65,10 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 6 function/gradient evaluations
 
 Newton produced  (4.4004986e-01)
-Value of F(X) = 1.638993
+Value of F(X) = 1.6389928e+00
+
 ---------------------------------------------------------
-Running testcase_3: 
+Gauss-Newton applied to RES, JAC nonlinear least squares system: 
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -72,7 +78,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 6 function/gradient evaluations
 
 Gauss-Newton produced  (6.9314718e-01)
-Norm of RES(X) = 0.000000
+Norm of RES(X) = 5.8039062e-13
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -82,7 +89,8 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 12 function/gradient evaluations
 
 Gauss-Newton produced  (4.4004986e-01)
-Norm of RES(X) = 1.810521
+Norm of RES(X) = 1.8105208e+00
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -92,7 +100,8 @@ Used the maximum number of function evaluations.
 Optimization required 30 function/gradient evaluations
 
 Gauss-Newton produced  (4.4743984e-02)
-Norm of RES(X) = 3.735361
+Norm of RES(X) = 3.7353611e+00
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -102,7 +111,8 @@ Used the maximum number of function evaluations.
 Optimization required 30 function/gradient evaluations
 
 Gauss-Newton produced  (-3.0438566e-01)
-Norm of RES(X) = 5.736599
+Norm of RES(X) = 5.7365990e+00
+
 ---------------------------------------------------------
 
   Start X0 = 1.000000
@@ -112,7 +122,8 @@ Used the maximum number of function evaluations.
 Optimization required 30 function/gradient evaluations
 
 Gauss-Newton produced  (3.2924827e+00)
-Norm of RES(X) = 19507.246947
+Norm of RES(X) = 1.9507247e+04
+
 ---------------------------------------------------------
 
   Start X0 = 0.500000
@@ -122,5 +133,4 @@ Gradient is within tolerance, x likely a local optimum.
 Optimization required 10 function/gradient evaluations
 
 Gauss-Newton produced  (4.4004986e-01)
-Norm of RES(X) = 1.810521
->> 
+Norm of RES(X) = 1.8105208e+00

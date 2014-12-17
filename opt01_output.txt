@@ -8,11 +8,15 @@ Optimization required 8 function/gradient evaluations
 
 Newton method produced (2.0000000e+00,-1.0000000e+00)
 
+Value of F(X) = 1.9714253e-24
+
 Secant method:
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 13 function/gradient evaluations
 
 BFGS   method produced (2.0000000e+00,-1.0000000e+00)
+
+Value of F(X) = 3.9936083e-30
 
 ---------------------------------------------------------
 Running testcase_1 as least squares problem: 
@@ -23,5 +27,4 @@ Optimization required 6 function/gradient evaluations
 
 Gauss-Newton produced  (2.0000000e+00, -1.0000000e+00)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 2.5337512e-12

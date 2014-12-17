@@ -8,11 +8,27 @@ Optimization required 7 function/gradient evaluations
 
 Newtons method produced  (1.0000000e+00,1.0000000e+00)
 
+Value of F(X) = 3.4326462e-20
+
 Secant:
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 141 function/gradient evaluations
 
 Secant method produced   (1.0000000e+00,1.0000000e+00)
+
+Value of F(X) = 2.4008117e-18
+
+---------------------------------------------------------
+Running testcase_6:  exact solution (0, 0, ...)
+Search region constrained to [-100,0] x [-100,100].
+---------------------------------------------------------
+Newton:
+KKT conditions are satisfied for box constrained problem
+Optimization required 17 function/gradient evaluations
+
+Newtons method produced  (0.0000000e+00,0.0000000e+00)
+
+Value of F(X) = 1.0000000e+00
 
 ---------------------------------------------------------
 Running testcase_6 as least squares problem: 
@@ -23,5 +39,4 @@ Optimization required 3 function/gradient evaluations
 
 Gauss-Newton produced  (1.0000000e+00, 1.0000000e+00)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 3.9253725e-14

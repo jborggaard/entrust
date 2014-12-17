@@ -313,6 +313,8 @@ Optimization required 33 function/gradient evaluations
 
 Trust-region produced [4.0195983e-03,5.0211658e-03,4.7322087e-271)
 
+Value of F(X) = 1.4188128e-09
+
 Newton (constrained x>=1):
 Running testcase_11: (constrained)    solution (1, 0, 0)
 
@@ -481,6 +483,8 @@ Optimization required 17 function/gradient evaluations
 
 Trust-region produced [4.0000000e+00,4.0000000e+00,1.7763568e-15)
 
+Value of F(X) = 1.0240000e+03
+
 ---------------------------------------------------------
 Running testcase_11 as least squares problem: 
 Exact solution (0, 0, 0)
@@ -490,5 +494,4 @@ Optimization required 17 function/gradient evaluations
 
 Gauss-Newton produced (1.52588e-04,1.52588e-04,0.00000e+00)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 7.3627514e-08

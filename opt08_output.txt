@@ -3,16 +3,20 @@
 Running testcase_8:  exact solution (0, 0, ...)
 ---------------------------------------------------------
 Newton:
-Used the maximum number of function evaluations.
-Optimization required 800 function/gradient evaluations
+Gradient is within tolerance, x likely a local optimum.
+Optimization required 18 function/gradient evaluations
 
-Line search produced   (8.01338e-02, -8.01784e-03, 3.99937e-02, 4.03969e-02)
+Line search produced   (2.4165696e-03, -2.4165696e-043.8665113e-04, 3.8665113e-04)
+
+Value of F(X) = 1.7085208e-10
 
 Newton:
-Used the maximum number of function evaluations.
-Optimization required 800 function/gradient evaluations
+Gradient is within tolerance, x likely a local optimum.
+Optimization required 18 function/gradient evaluations
 
-Trust region produced  (8.13237e-02, -8.15800e-03, 4.01012e-02, 4.05160e-02)
+Trust region produced  (2.5657370e-03, -2.5657370e-04, 5.1107421e-04, 5.1107421e-04)
+
+Value of F(X) = 1.8089603e-10
 
 ---------------------------------------------------------
 Running testcase_8 as least squares problem: 
@@ -21,7 +25,6 @@ Exact solution (0, 0, ...)
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 15 function/gradient evaluations
 
-Gauss-Newton produced   (2.28142e-04, -2.28142e-05, 9.01908e-05, 9.01908e-05)
+Gauss-Newton produced   (2.2814169e-04, -2.2814169e-05, 9.0190828e-05, 9.0190835e-05)
 
-Norm of F(X) = 0.000000
->> 
+Norm of RES(X) = 7.2981641e-08

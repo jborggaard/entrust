@@ -23,4 +23,4 @@
    x = entrust(fname, x0, options);
    fprintf('Newtons method produced  (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt15_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n', f );

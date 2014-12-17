@@ -23,15 +23,15 @@
    fprintf('Line search produced  (%8.5e,%8.5e,%8.5e,%8.5e)\n\n',...
      x(1),x(2),x(3),x(4))
    f = opt09_fgh ( x, 'f' );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
-   fprintf('Value of F(X) = %f\n', f );
    fprintf('Newton:\n')
    options.globalization      = 'trust_region';
    x = entrust(fname, x0, options);
    fprintf('Trust-region produced (%8.5e,%8.5e,%8.5e,%8.5e)\n\n',...
      x(1),x(2),x(3),x(4))
    f = opt09_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
@@ -55,5 +55,5 @@
    fprintf('Gauss-Newton produced (%8.5e,%8.5e,%8.5e,%8.5e)\n\n',...
      x(1),x(2),x(3),x(4))
    [ res, jac ] = opt09_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 

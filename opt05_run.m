@@ -33,7 +33,7 @@
 
    fprintf('Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    f = opt05_fgh ( x, 'f', alpha );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    options.scale_x            = [ 1/alpha; alpha ];
    fprintf('Scaled:\n')
@@ -43,7 +43,7 @@
 
    fprintf('Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    f = opt05_fgh ( x, 'f', alpha );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
@@ -70,7 +70,7 @@
 
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    [ res, jac ] = opt05_rj ( x, 'f', alpha );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 
    options.scale_x            = [ 1/alpha; alpha ];
    fprintf('Scaled:\n')
@@ -79,4 +79,4 @@
 
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    [ res, jac ] = opt05_rj ( x, 'f', alpha );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n', norm ( res ) );

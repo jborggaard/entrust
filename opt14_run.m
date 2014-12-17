@@ -24,13 +24,13 @@
    x = entrust(fname, x0, options);
    fprintf('Newtons method produced  (%10.7e,%10.7e,%10.7e)\n\n',x(1),x(2),x(3))
    f = opt14_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    x0 = [ 2; -1; 1 ];
    x = entrust(fname, x0, options);
    fprintf('Newtons method produced  (%10.7e,%10.7e,%10.7e)\n\n',x(1),x(2),x(3))
    f = opt14_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
@@ -52,10 +52,10 @@
    x = entrust(fname, x0, options);
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e, %10.7e)\n\n',x(1),x(2),x(3))
    [ res, jac ] = opt14_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );
 
    x0 = [ 2; -1; 1 ];
    x = entrust(fname, x0, options);
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e, %10.7e)\n\n',x(1),x(2),x(3))
    [ res, jac ] = opt14_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );

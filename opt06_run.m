@@ -25,14 +25,14 @@
    x = entrust(fname, x0, options);
    fprintf('Newtons method produced  (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt06_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    fprintf('Secant:\n')
    options.method             = 'secant';
    x = entrust(fname, x0, options);
    fprintf('Secant method produced   (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt06_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Running the extended Rosenbrock function with box.
@@ -56,7 +56,7 @@
    x = entrust(fname, x0, options);
    fprintf('Newtons method produced  (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt06_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
@@ -79,4 +79,4 @@
 
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    [ res, jac ] = opt06_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n\n', norm ( res ) );

@@ -109,28 +109,28 @@ Newton:
  -------------------------------------------------------
  Design Variables:   2.85827032e-01,   2.79325235e-01
  Function Value:     5.92256276e+00
- Step:              -5.51437852e-05,  -6.19322356e-07
- Gradient:           1.15897536e-04,   7.01802011e-04
- Norm of Step:       5.51472629e-05
- Norm of Gradient:   7.11307460e-04
+ Step:              -5.51437828e-05,  -6.19322471e-07
+ Gradient:           1.15897594e-04,   7.01801912e-04
+ Norm of Step:       5.51472605e-05
+ Norm of Gradient:   7.11307371e-04
 
  Iteration  11
  -------------------------------------------------------
  Design Variables:   2.85815727e-01,   2.79325773e-01
  Function Value:     5.92256276e+00
- Step:              -1.13050122e-05,   5.38467039e-07
- Gradient:           1.40655902e-06,   2.95200900e-05
- Norm of Step:       1.13178287e-05
- Norm of Gradient:   2.95535806e-05
+ Step:              -1.13050208e-05,   5.38467450e-07
+ Gradient:           1.40655902e-06,   2.95200271e-05
+ Norm of Step:       1.13178374e-05
+ Norm of Gradient:   2.95535177e-05
 
  Iteration  12
  -------------------------------------------------------
  Design Variables:   2.85815727e-01,   2.79325773e-01
  Function Value:     5.92256276e+00
- Step:              -4.67533234e-11,  -4.42368364e-13
- Gradient:          -2.91038305e-11,   1.20820687e-10
- Norm of Step:       4.67554162e-11
- Norm of Gradient:   1.24276592e-10
+ Step:              -4.71646056e-11,  -4.22772928e-13
+ Gradient:          -1.45519152e-11,   5.16621412e-10
+ Norm of Step:       4.71665003e-11
+ Norm of Gradient:   5.16826317e-10
 
 Step in design variables is becoming too small.
 Gradient is within tolerance, x likely a local optimum.
@@ -138,14 +138,15 @@ Optimization required 13 function/gradient evaluations
 
 Newton's method produced  (2.8581573e-01,2.7932577e-01)
 
-Value of F(X) = 5.922563
+Value of F(X) = 5.9225628e+00
+
 ---------------------------------------------------------
 Running testcase_13 as least squares problem: 
 ---------------------------------------------------------
 Used the maximum number of function evaluations.
 Optimization required 10000 function/gradient evaluations
 
-Gauss-Newton produced  (-1.1111416e+01, 8.8791383e-01)
+Gauss-Newton produced  (-5.3745104e-01, 3.8610255e-01)
 
-Norm of RES(X) = 6538.854111
->> 
+Norm of RES(X) = 1.9265489e+02
+

@@ -11,7 +11,8 @@ Optimization required 33 function/gradient evaluations
 
 Line search produced  (1.0000000e+00,3.6383941e-09,7.6912417e-09)
 
-Value of F(X) = 0.000000
+Value of F(X) = 4.8317860e-16
+
 Secant:
 Step in design variables is becoming too small.
 Gradient is within tolerance, x likely a local optimum.
@@ -19,7 +20,8 @@ Optimization required 34 function/gradient evaluations
 
 Trust-region produced (1.0000000e+00,-1.1221551e-08,-1.8922031e-08)
 
-Value of F(X) = 0.000000
+Value of F(X) = 5.1688824e-16
+
 ---------------------------------------------------------
 Running testcase_7 as least squares problem: 
 Exact solution (1, 0, 0)
@@ -27,7 +29,6 @@ Exact solution (1, 0, 0)
 Gradient is within tolerance, x likely a local optimum.
 Optimization required 11 function/gradient evaluations
 
-Gauss-Newton produced  (1.0000000e+00,7.1985442e-16,-7.2660968e-22)
+Gauss-Newton produced  (1.0000000e+00,7.1985487e-16,4.6447144e-27)
 
-Norm of RES(X) = 0.000000
->> 
+Norm of RES(X) = 1.3252651e-14

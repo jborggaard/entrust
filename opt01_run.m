@@ -34,7 +34,7 @@
 
    fprintf('Newton method produced (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt01_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
 %
 %  Run with secant method.
 % 
@@ -44,7 +44,7 @@
    x = entrust(fname, x0, options);
    fprintf('BFGS   method produced (%10.7e,%10.7e)\n\n',x(1),x(2))
    f = opt01_fgh ( x, 'f' );
-   fprintf('Value of F(X) = %f\n', f );
+   fprintf('Value of F(X) = %10.7e\n\n', f );
    %---------------------------------------------------------------------
    %  Test Gauss-Newton strategies.
    %---------------------------------------------------------------------
@@ -68,4 +68,4 @@
 
    fprintf('Gauss-Newton produced  (%10.7e, %10.7e)\n\n',x(1),x(2))
    [ res, jac ] = opt01_rj ( x, 'f' );
-   fprintf('Norm of RES(X) = %f\n', norm ( res ) );
+   fprintf('Norm of RES(X) = %10.7e\n', norm ( res ) );
