@@ -1,5 +1,5 @@
 function x = entrust(fname, x, options, varargin)
-%------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %  entrust.m - a driver for an unconstrained optimization problem using
 %              line search or trust-region globalization strategies and
 %              several types of secant update strategies.  Box constraints
@@ -90,8 +90,8 @@ function x = entrust(fname, x, options, varargin)
 %                        (default: obtained through Cauchy step)
 %
 %                 p0, etc - user supplied parameters
-%------------------------------------------------------------------------
-  if ~ ( isa(fname, 'function_handle') | isa(fname, 'char') )
+%-------------------------------------------------------------------------------
+  if ~ ( isa(fname, 'function_handle') || isa(fname, 'char') )
     fprintf('Input Error: first argument not a valid function handle')
     return
   end
@@ -100,12 +100,12 @@ function x = entrust(fname, x, options, varargin)
   x        = x(:);
 
   %  Set unspecified options to their default values
-  %  -----------------------------------------------
-  if ( nargin < 3 ), options = [];, end
+  %  ---------------------------------------------------------------------------
+  if ( nargin < 3 ), options = []; end
   [fname, options] = initialize(fname, options, n_desvar);
 
   %  Compute the function/residual value (and additional information) 
-  %  ----------------------------------------------------------------
+  %  ---------------------------------------------------------------------------
   f_count = 1;
   %  We may want to fold this into another function (fcn_eval)
   if strcmp( options.method,'newton' )
@@ -132,7 +132,7 @@ function x = entrust(fname, x, options, varargin)
   if strcmp( options.method,'gauss_newton' )
     [ r, jac  ] = feval(fname,x,'all',varargin{:});
     r = r(:);
-    f = 0.5*r'*r;
+    f = 0.5*(r'*r);
     g = jac'*r; 
   end
 
@@ -302,7 +302,7 @@ function x = entrust(fname, x, options, varargin)
         if strcmp( options.method,'gauss_newton' )
           [ r_plus, jac_plus  ] = feval(fname,x_plus,'all',varargin{:});
           r_plus = r_plus(:);
-          f_plus = 0.5*r_plus'*r_plus;
+          f_plus = 0.5*(r_plus'*r_plus);
           g_plus = jac_plus'*r_plus;
           H_plus = jac_plus'*jac_plus;
         end
@@ -410,7 +410,7 @@ function x = entrust(fname, x, options, varargin)
           [ r_plus, jac_plus  ] = ...
                     feval(fname,trial_point,'all',varargin{:});
           r_plus = r_plus(:);
-          f_plus = 0.5*r_plus'*r_plus;
+          f_plus = 0.5*(r_plus'*r_plus);
           g_plus = jac_plus'*r_plus;
           H_plus = jac_plus'*jac_plus;
         end
@@ -710,7 +710,7 @@ function [s,val,lambda,active] = box_trust(g,H,delta,lower,upper,options)
   end % if
   %
   while active.count <= count_max & ~active.converged
-    options.tr_radius
+    %% options.tr_radius
     %  Given an active set form a reduced std. TR sub-problem
     [g_k, H_k, delta_k, active.free, active.p_c]  = ...
 	                  reduce(g,H,delta,lower,upper,active.set);
@@ -795,8 +795,10 @@ function [g_f, H_ff, delta_k, active_free, p_c] = ...
 end % return
 %
 %
-%----------------------------------------------------------------------------
-function p = assemble(s_f,lower,upper,active);	
+%-------------------------------------------------------------------------------
+
+
+function p = assemble(s_f,lower,upper,active)
 %------------------------------------------------------------------------
 % assemble the complete  vector from the 'free'
 % and the box-constrained components
@@ -814,7 +816,7 @@ end % return
 %
 %-------------------------------------------------------------------------
 function [new_active_set, count_out, b_feasible] = ...
-                         test_feas(s_f,lower,upper,active_free,active_set,count_in)
+                      test_feas(s_f,lower,upper,active_free,active_set,count_in)
 %
 % Test to see if any of the free variables violate a box constraint.
 % If so, we add a (single) constraint to the active set.
@@ -832,7 +834,7 @@ function [new_active_set, count_out, b_feasible] = ...
   [low_min, i_low_min] = min(d_low);
   [upp_min, i_upp_min] = min(d_upp); 
   %
-  if ( low_min < 0 | upp_min < 0 )
+  if ( low_min < 0 || upp_min < 0 )
     if low_min < upp_min % a lower bound is the worst violator
       worst_violator = -active_free(i_low_min(1));
     else                 % an upper bound is the worst violator
@@ -854,7 +856,7 @@ end % return
 %
 %-------------------------------------------------------------------------
 function [new_active_set, count_out, optimal]  = ...
-                      test_opt(g,H,p,lambda,active_set,count_in);
+                      test_opt(g,H,p,lambda,active_set,count_in)
 %
 % Test the sign of the KKT multipliers associated with the bound constraints
 % If any violate the test, delete the worst violator from the active set
